@@ -7,3 +7,12 @@ edition = "2024"
 ollama-rs = { version = "0.3.4", features = ["stream"] }
 tokio = { version = "1", features = ["full"] }
 tokio-stream = "0.1"
+anyhow = "1"        # Clean error propagation (no more .unwrap() chains)
+ctrlc = "3"         # Graceful Ctrl+C handling
+
+[profile.release]
+opt-level = 3       # Max optimization
+lto = true          # Link-Time Optimization — smaller, faster binary
+codegen-units = 1   # Single codegen unit for best optimization
+strip = true        # Strip debug symbols → much smaller binary
+panic = "abort"     # Smaller binary: no stack unwinding on panic
